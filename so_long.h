@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocarlo2 <jocarlo2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:46:40 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/10/02 07:52:07 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/17 12:43:38 by jocarlo2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@
 #include "so_long_structs.h"
 #include "get_next_line/get_next_line.h"
 #include "libft/inc/libft.h"
-#include "mlx/mlx.h"
+#ifdef __LINUX__
+# include "minilibx-linux/mlx.h"
+#else
+# include "mlx/mlx.h"    // versão macOS
+#endif
 
 char	**create_grid(char *file, t_map *map);
 void	check_file(char *file);

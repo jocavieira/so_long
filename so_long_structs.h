@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jocarlo2 <jocarlo2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:30:48 by jocarlo2          #+#    #+#             */
-/*   Updated: 2026/01/14 08:36:39 by jocavieira       ###   ########.fr       */
+/*   Updated: 2026/01/17 12:59:00 by jocarlo2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ typedef struct s_img
     void    *ptr;
     int     w;
     int     h;
+    char    *addr;
+    int     bpp;
+    int     line_len;
+    int     endian;
 }   t_img;
 
 typedef struct s_game

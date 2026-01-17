@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+         #
+#    By: jocarlo2 <jocarlo2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/28 10:39:55 by jocarlo2          #+#    #+#              #
-#    Updated: 2025/10/02 08:11:54 by jocarlo2         ###   ########.fr        #
+#    Updated: 2026/01/17 12:48:10 by jocarlo2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = check_file.c \
@@ -35,12 +35,13 @@ SOCFLAGS =
 
 ifeq ($(UNAME_S), Linux)
 	SOCFLAGS = -D__LINUX__
-	MLX = -Lmlx -lmlx -lX11 -lXext -lm
+	MLX = -Lminilibx-linux -lmlx -lX11 -lXext -lm
 endif
 ifeq ($(UNAME_S), Darwin)
 	SOCFLAGS = -D__MACOS__
 	MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
+
 
 # Bibliotecas
 LIBFT = -Llibft -lft
