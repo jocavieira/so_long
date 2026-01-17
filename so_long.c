@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 10:59:04 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/10/02 08:16:36 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/14 08:40:31 by jocavieira       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,30 @@ int key_hook(int keycode, t_game *game)
 
 void move_player(t_game *game, int dx, int dy)
 {
-    int nx = game->map.player_x + dx;
-    int ny = game->map.player_y + dy;
-    char dest = game->map.grid[ny][nx];
+	int	nx;
+	int	ny;
+	char	dest;
 
-    if (dest == '1' || (dest == 'E' && game->map.collected != game->map.collect_count))
+	nx = game->map.player_x + dx;
+	ny = game->map.player_y + dy;
+    if (nx < 0 || nx >= game->map.width || ny < 0 || ny >= game->map.height)
+        return;
+    dest = game->map.grid[ny][nx];
+    if (dest == '1')
         return;
     if (dest == 'C')
         game->map.collected++;
-    game->map.grid[game->map.player_y][game->map.player_x] = '0';
+    game->map.grid[game->map.player_y][game->map.player_x] = game->map.prev_tile;
     game->map.player_x = nx;
     game->map.player_y = ny;
+    if (dest == 'E' && game->map.collected < game->map.collect_count)
+        game->map.prev_tile = 'E'; 
+    else
+        game->map.prev_tile = '0';
     game->map.grid[ny][nx] = 'P';
     draw_map(game);
     count_move(game);
-    if (dest == 'E')
+    if (dest == 'E' && game->map.collected == game->map.collect_count)
         exit_game("You won! CONGRATULATIONS!!", game);
 }
 

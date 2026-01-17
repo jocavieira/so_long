@@ -29,18 +29,30 @@ OBJ = $(SRC:.c=.o)
 # Includes
 INC = -I. -Ilibft/inc -Iget_next_line
 
+# Detectar SO
+UNAME_S = $(shell uname -s)
+SOCFLAGS =
+
+ifeq ($(UNAME_S), Linux)
+	SOCFLAGS = -D__LINUX__
+	MLX = -Lmlx -lmlx -lX11 -lXext -lm
+endif
+ifeq ($(UNAME_S), Darwin)
+	SOCFLAGS = -D__MACOS__
+	MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
+endif
+
 # Bibliotecas
 LIBFT = -Llibft -lft
 GNL = get_next_line/gnl.a
-MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 all: libft gnl $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(GNL) $(MLX) $(INC) -o $(NAME)
+	$(CC) $(CFLAGS) $(SOCFLAGS) $(OBJ) $(LIBFT) $(GNL) $(MLX) $(INC) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(SOCFLAGS) $(INC) -c $< -o $@
 
 # Compila libft
 libft:

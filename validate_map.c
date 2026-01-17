@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:44:06 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/09/28 14:48:20 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/14 07:37:19 by jocavieira       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,41 @@ int check_map(char *file, t_map *map)
 {
     check_file(file);
     map->grid = create_grid(file, map);
-    if (is_rectangular(map))
-        map_error_exit("Map is not rectangular", map);
-    if (is_surrounded(map))
-        map_error_exit("Map is not surrounded by walls", map);
     map->player_count = 0;
     map->exit_count = 0;
     map->collect_count = 0;
     map->collected = 0;
     map->exit_reached = 0;
     map->moves = 0;
+    if (is_rectangular(map))
+    {
+        free_grid(map->grid);
+        map->grid = NULL;
+        write(2, "Error\nMap is not rectangular\n", 30);
+        return (1);
+    }
+    if (is_surrounded(map))
+    {
+        free_grid(map->grid);
+        map->grid = NULL;
+        write(2, "Error\nMap is not surrounded by walls\n", 39);
+        return (1);
+    }
     if (validate_content(map))
-        map_error_exit("map must have 1 player, 1 exit, and at least 1 collectible", map);
+    {
+        free_grid(map->grid);
+        map->grid = NULL;
+        write(2, "Error\nmap must have 1 player, 1 exit, and at least 1 collectible\n", 67);
+        return (1);
+    }
     if (check_path(map))
-        map_error_exit("No valid path to collect all items and reach the exit", map);
-     map->collected = 0;
+    {
+        free_grid(map->grid);
+        map->grid = NULL;
+        write(2, "Error\nNo valid path to collect all items and reach the exit\n", 62);
+        return (1);
+    }
+    map->collected = 0;
     map->exit_reached = 0;
     return (0);
 }

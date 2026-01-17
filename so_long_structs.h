@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_structs.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:30:48 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/09/28 13:22:55 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/14 08:36:39 by jocavieira       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_map
 	int		player_count;
 	int		player_x;
 	int		player_y;
+    char	prev_tile;
 	int		exit_count;
 	int		collect_count;
 	int		collected;

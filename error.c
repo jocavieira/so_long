@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:23:47 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/10/02 07:51:54 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/14 07:37:30 by jocavieira       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ void	exit_game(char *msg, t_game *game)
 	if (game)
 	{
 		if (game->map.grid)
+		{
 			free_grid(game->map.grid);
+			game->map.grid = NULL;
+		}
 		free_images(game);
-		if (game->win)
+		if (game->win && game->mlx)
+		{
 			mlx_destroy_window(game->mlx, game->win);
-#ifdef __linux__
+			game->win = NULL;
+		}
+#ifdef __LINUX__
 		if (game->mlx)
 		{
 			mlx_destroy_display(game->mlx);

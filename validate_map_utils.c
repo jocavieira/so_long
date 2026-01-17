@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocarlo2 <jocarlo2@sudent.42porto.com>     +#+  +:+       +#+        */
+/*   By: jocavieira <jocavieira@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 11:52:34 by jocarlo2          #+#    #+#             */
-/*   Updated: 2025/10/02 07:27:04 by jocarlo2         ###   ########.fr       */
+/*   Updated: 2026/01/14 08:20:04 by jocavieira       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ void find_player(t_map *map)
 
 void floodfill(char **grid, int x, int y, t_map *map)
 {
-    if (x < 0 || y < 0 || !grid[y] || !grid[y][x] || grid[y][x] == '1' || grid[y][x] == 'V')
-        return;
-    if (grid[y][x] == 'C')
-        map->collected++;
-    if (grid[y][x] == 'E')
-        map->exit_reached = 1;
-    grid[y][x] = 'V';
-    floodfill(grid, x+1, y, map);
-    floodfill(grid, x-1, y, map);
-    floodfill(grid, x, y+1, map);
-    floodfill(grid, x, y-1, map);
+	if (x < 0 || y < 0 || y >= map->height || x >= map->width)
+		return ;
+	if (!grid[y] || !grid[y][x] || grid[y][x] == '1' || grid[y][x] == 'V')
+		return ;
+	if (grid[y][x] == 'C')
+		map->collected++;
+	if (grid[y][x] == 'E')
+		map->exit_reached = 1;
+	grid[y][x] = 'V';
+	floodfill(grid, x + 1, y, map);
+	floodfill(grid, x - 1, y, map);
+	floodfill(grid, x, y + 1, map);
+	floodfill(grid, x, y - 1, map);
 }
