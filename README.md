@@ -1,54 +1,81 @@
-# 🎮 So_long-Tester
+# 🕹️ so_long
 
-This Tester checks:
+A simple 2D game developed in C using the MiniLibX graphical library as part of the 42 School curriculum.
 
-▪️ Memory leaks on erroneous maps
+---
 
-▪️ Valid extensions
+## 📖 About
 
-▪️ Permissions
+**so_long** is a small tile-based 2D game where the player must collect all collectibles and reach the exit.
 
-▪️ Valid arguments
+The project focuses on:
+- Graphics programming with MiniLibX
+- Event-driven programming
+- Map parsing and validation
+- Memory management
+- Game loop implementation
 
-▪️ Rectangular maps
+---
 
-▪️ No incorrect characters
+## 🎮 Gameplay
 
-▪️ Player and output are not duplicated
+- Move through the map using keyboard inputs
+- Collect all collectibles (`C`)
+- Reach the exit (`E`) after collecting everything
+- Avoid walls (`1`)
 
-▪️ Entire map is surrounded by walls
+---
 
-▪️ Required characters (E, P, C, 1)
+## 🗺️ Map Format
 
-▪️ Don't throw error on valid maps
+Example:
 
-▪️ Your program does not terminate unexpectedly.
+111111
+1P0C01
+100001
+1C0E01
+111111
 
-<img width="439" alt="Screen Shot 2024-04-22 at 8 15 37 PM" src="https://github.com/gemartin99/So_long-Tester/assets/66915274/c74e7052-2369-4b47-a5d9-006d57a3a82f">
+### Legend:
+- `1` → Wall  
+- `0` → Empty space  
+- `P` → Player  
+- `C` → Collectible  
+- `E` → Exit  
 
+---
 
-# 💡 How to use
+## ⚙️ Installation
 
-You should clone this repository with the following command:
-
-```SH
-git clone git@github.com:gemartin99/So_long-Tester.git
+```bash
+git clone https://github.com/jocavieira/so_long.git
+cd so_long
+make
 ```
 
-Once the repository has been cloned, we will place it inside the repository with the following command:
+---
 
-```SH
-cd So_long-Tester/
+## ▶️ Usage
+
+```bash
+./so_long maps/map.ber
 ```
 
-Now we must copy all the content of the repository that we have just cloned and paste it in our folder where the so_long program is located. We will make use of the following command:
+---
 
-```SH
-cp -r Tester_so_long.sh maps_err maps_valid /path/to/so_long
-```
+## 🧠 Features
 
-Once we have copied everything to the correct path we only have to execute the script with the following command:
+- ✔️ Map validation:
+  - Rectangular shape
+  - Surrounded by walls
+  - Valid path (player can reach exit and collectibles)
+- ✔️ Player movement with key inputs
+- ✔️ Move counter in terminal
+- ✔️ Sprite rendering with layering (floor + objects)
+- ✔️ Clean window and memory management
 
-```SH
-bash Tester_so_long.sh
-```
+---
+
+## 🖼️ Graphics
+
+This project uses **MiniLibX**, a lightweight graphical library provided by 42.
